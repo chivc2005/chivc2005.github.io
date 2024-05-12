@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--dùng link này để sử dụng bootstrap-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <!--dùng link này để sử dụng icon bootstrap. cách lấy link gõ vào tìm kiếm google: bootstrap icons cdn -> chọn trang https://blog.getbootstrap.com/2021/01/07/bootstrap-icons-1-3-0/
+    sau đó copy link đầu tiên phần CDN quickstart with icon fonts:
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    dán vào thẻ head trước thẻ     <link rel="stylesheet" href="./css/styles.css" />
+    trong file html-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+    />
+    <!---->
+    <!--dùng link này cho phần hiển thị mapbox (bản đồ)-->
+    <link href=”https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css”
+    rel=”stylesheet”/>
+    <!---->
+    <link rel="stylesheet" href="./css/styles.css" />
+    <title>Frontend Bootcamp</title>
+  </head>
+  <body>
+    <!--navbar-->
+    <!--lớp navbar định dạng thanh điều hướng. navbar-expand-lg định dạng Khi đến giới hạn
+    kích thước màn hình lớn nhất,
+    navbar sẽ mở rộng hết cỡ để hiển thị tất cả các link và các thành phần,Với các kích cỡ màn hình nhỏ hơn,
+    navbar sẽ thu gọn lại thành dạng menu hamburger. bg-dark định dạng màu của navbar là màu tối. navbar-dark định dạng màu chữ của navbar, py-3 lớp py để thêm padding
+    theo hướng trục tung (trên-dưới)  -->
+    <!--fixed-top làm cho navbar sẽ được gắn cố định dù cho ta có cuộn trang đến đâu, có điều hướng đến đâu đi chăng nữa.
+    Ở đây xuất hiện một vấn đề về khoảng cách. Một phần đỉnh đầu cô gái bị che khuất bởi navbar. Để khắc phục, ta vào sheet
+    style.css Nhập body::before.-->
+
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 fixed-top">
+      <!--thêm lớp container để giữa logo Frontend Bootcamp và lề trang đã xuất hiện một khoảng trống (không dùng padding vì
+      không muốn tạo khoảng cách giữa dòng chữ với lề quá lớn khi co kéo màn hình.)-->
+      <div class="container">
+        <a href="#" class="navbar-brand">Frontend Bootcamp</a>
+        <!--sau khi khai báo thẻ button này chạy chương trình, thu nhỏ cửa sổ thấy ô vuông có 3 gạch xuất hiện ( icon hamburger), nhấn vào  icon hamburger sẽ thấy có sự thay đổi do thẻ div có lớp navbar-collapse
+        có chứa id navmenu.-->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navmenu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!--lớp navbar-collapse để hiện tất cả các mục trên các màn hình nhỏ, Còn đối với các màn hình lớn hơn
+        thì toàn bộ các mục sẽ được hiển thị sẵn.-->
+        <div class="collapse navbar-collapse" id="navmenu">
+          <!-- thêm lớp ms, tức là margin start. Nhập ms-auto để đẩy menu về phía bên phải. tới đây ta chạy trang web nếu thu nhỏ màn hình, ta sẽ thấy menu nằm dưới thương hiệu. Đó là do tác động của dòng navbar-expand-lg. Ta có thể đổi lg thành sm thì menu vẫn bình thường trừ khi ta co kéo màn hình đạt giới hạn sm.-->
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a href="#learn" class="nav-link">What You'll Learn.</a>
+            </li>
+            <li class="nav-item">
+              <a href="#questions" class="nav-link">Questions.</a>
+            </li>
+            <li class="nav-item">
+              <a href="#instructors" class="nav-link">Instructors.</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!--showcase-->
+    <!--bg-dark nền tối, text-light chữ sáng, p-5: nếu muốn padding toàn bộ các hướng
+    thì chỉ cần nhập p-x (trong đó x từ 1 đến 5, 5 là khoảng cách lớn nhất), p-lg-0: bỏ padding 5px và lấy giá trị padding 0 đối với màn hình lớn hơn lg, text-center văn bản nằm giữa, text-sm-start: màn hình từ kích cở lớn hơn sm thì văn bản nằm bên trái nhỏ hơn sm thì nằm center
+    pt-lg-5 tức là padding top 5px đối với màn hình lớn hơn chỉ số lg để phần đầu của cô gái cách xa nav-->
+    <section
+      class="bg-dark text-light p-5 p-lg-0 pt-lg-5 text-center text-sm-start"
+    >
+      <!--container tạo khoảng trống giữa phần văn bản và lề trang-->
+      <div class="container">
+        <!-- d-flex là flex trong bootstrap làm cho hình ảnh và chữ đặt trên 1 hàng bất kể màn hình lớn nhỏ. d-sm-flex: có dạng flex
+        khi kích thước màn hình lớn hơn điểm giới hạn sm không có dạng flex (sẽ rớt xuống thành 1 cột) khi kích thước màn hình nhỏ hơn điểm giới hạn sm. ở đây sử dụng d-sm-flex. align-items-center căn giữa theo chiều dọc, justify-content-between canh giữa theo chiều ngang -->
+        <div class="d-sm-flex align-items-center justify-content-between">
+          <div>
+            <!--text-warning: warning, tức cảnh báo, có màu mặc định là màu vàng.-->
+            <h1>Become a <span class="text-warning">Web Developer</span>.</h1>
+            <!--lead chữ to lên một chút, my-4 xung quanh phần văn bản
+            phải có không gian. Ta có thể sử dụng lớp margin,nhập my-4, y ở đây chính là trục tung, theo hướng trên-dưới.-->
+            <p class="lead my-4">
+              là flex trong bootstrap làm cho hình ảnh và chữ đặt trên 1 hàng
+              bất kể màn hình lớn nhỏ. d-sm-flex: có dạng flex khi kích thước
+              màn hình lớn hơn điểm giới hạn sm không có dạng flex (sẽ rớt xuống
+              thành 1 cột) khi kích thước màn hình nhỏ hơn điểm giới hạn sm. ở
+              đây sử dụng d-sm-flex
+            </p>
+            <!--btn-primary nút có màu xanh, btn-lg làm nút to hơn mặt định-->
+            <button
+              class="btn btn-primary btn-lg"
+              data-bs-toggle="modal"
+              data-bs-target="#enroll"
+            >
+              Start the enrollment
+            </button>
+          </div>
+          <!-- img-fluid hình ảnh nằm gọn trong container (mặt dù nó đã nằm gọn trong container rôi do có bootstrap và css rôi). w-50 để thu nhỏ kích thước hình ảnh 50$ so với ban đầu (cũng tương tự với h - height), d-none: hình ảnh biến mất, d-sm-block: kích thước màn hình lớn hơn sm thì xuất hiện hình ảnh nhỏ hơn thì hình ảnh biến mất-->
+          <img
+            src="img/1.png"
+            alt=""
+            class="img-fluid w-50 d-none d-sm-block"
+          />
+        </div>
+      </div>
+    </section>
+    <!--Newsletter-->
+    <section class="bg-primary text-light p-5">
+      <div class="container">
+        <div class="d-md-flex justify-content-between align-items-center">
+          <!--mb-3 tức margin bottom 3, tuy nhiên đối với các màn hình kích thước trung bình,
+          tôi không muốn có margin bottom. Do vậy, ta nhập thêm mb-md-0.-->
+          <h3 class="mb-3 mb-md-0">Sign Up For Our Newsletter</h3>
+          <!--Tại phần tài liệu Bootstrap (https://getbootstrap.com/docs/5.1/getting-started/introduction/ ), 
+          đến mục Forms-> input group,  sử dụng kiểu nhóm input Button addons, copy nhóm thứ 2 dán vào bên dưới-->
+          <!--để thu hẹp chiều rộng của nhóm input thêm news-input rồi chuyển qua sheet #style.css dùng truy vấn media-->
+          <div class="input-group news-input">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Enter Email"
+              aria-label="Recipient's username"
+              aria-describedby="button-addon2"
+            />
+            <!--thay btn-outline-secondary bằng btn-dark để thay đổi màu nút, thêm btn-lg để phóng to nút 
+            đồng thời phóng to phần input do cùng một nhóm -->
+            <button class="btn btn-dark btn-lg" type="button">Button</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Boxes.-->
+    <!--p-5 bao toàn bộ phần viền xung quanh-->
+    <!--col-md thêm cột đối với màn hình có kích thước md (trung bình trở lên), đối voeis điện thoại thì chỉ một cột-->
+    <!--g-4 tạo khoảng cách giữa các ô khi thu nhỏ màn hình. Ta cũng có thể sử dụng gy để tạo khoảng cách trên-dưới
+    hoặc gx để tạo khoảng cách trái-phải.-->
+    <section class="p-5">
+      <div class="container">
+        <div class="row text-center g-4">
+          <div class="col-md">
+            <div class="card bg-dark text-light">
+              <div class="card-body text-center">
+                <!--Tôi muốn icon có kích thước to hơn tương đương h1. Trong Bootstrap, nếu không muốn sử dụng
+                thẻ h1, h2, h3 thật thì
+                ta có thể sử dụng những thẻ đó dưới dạng lớp.
+                Ta có thể sử dụng một thẻ div có lớp là h1. 
+                Sau đó chuyển dòng <i class="bi bi-laptop"></i> vào bên trong thẻ div có lớp h1.-->
+                <div class="h1 mb-3">
+                  <!--chèn icon bootstrap, bi là bootstrap icon, bi-laptop để sử dụng icon laptop-->
+                  <i class="bi bi-laptop"></i>
+                </div>
+                <h3 class="card-title mb-3">Virtual</h3>
+                <p class="card-text">
+                  Tôi muốn icon có kích thước to hơn tương đương h1. Trong
+                  Bootstrap, nếu không muốn sử dụng thẻ h1, h2, h3 thật thì ta
+                  có thể sử dụng những thẻ đó dưới dạng lớp.
+                </p>
+                <a href="#" class="btn btn-primary">Read More</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="card bg-secondary text-light">
+              <div class="card-body text-center">
+                <!--Tôi muốn icon có kích thước to hơn tương đương h1. Trong Bootstrap, nếu không muốn sử dụng
+              thẻ h1, h2, h3 thật thì
+              ta có thể sử dụng những thẻ đó dưới dạng lớp.
+              Ta có thể sử dụng một thẻ div có lớp là h1. 
+              Sau đó chuyển dòng <i class="bi bi-laptop"></i> vào bên trong thẻ div có lớp h1.-->
+                <div class="h1 mb-3">
+                  <!--chèn icon bootstrap, bi là bootstrap icon, bi-laptop để sử dụng icon laptop-->
+                  <i class="bi bi-person-square"></i>
+                </div>
+                <h3 class="card-title mb-3">Hybrid</h3>
+                <p class="card-text">
+                  Tôi muốn icon có kích thước to hơn tương đương h1. Trong
+                  Bootstrap, nếu không muốn sử dụng thẻ h1, h2, h3 thật thì ta
+                  có thể sử dụng những thẻ đó dưới dạng lớp.
+                </p>
+                <a href="#" class="btn btn-dark">Read More</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="card bg-dark text-light">
+              <div class="card-body text-center">
+                <!--Tôi muốn icon có kích thước to hơn tương đương h1. Trong Bootstrap, nếu không muốn sử dụng
+              thẻ h1, h2, h3 thật thì
+              ta có thể sử dụng những thẻ đó dưới dạng lớp.
+              Ta có thể sử dụng một thẻ div có lớp là h1. 
+              Sau đó chuyển dòng <i class="bi bi-laptop"></i> vào bên trong thẻ div có lớp h1.-->
+                <div class="h1 mb-3">
+                  <!--chèn icon bootstrap, bi là bootstrap icon, bi-laptop để sử dụng icon laptop-->
+                  <i class="bi bi-people"></i>
+                </div>
+                <h3 class="card-title mb-3">In Person</h3>
+                <p class="card-text">
+                  Tôi muốn icon có kích thước to hơn tương đương h1. Trong
+                  Bootstrap, nếu không muốn sử dụng thẻ h1, h2, h3 thật thì ta
+                  có thể sử dụng những thẻ đó dưới dạng lớp.
+                </p>
+                <a href="#" class="btn btn-primary">Read More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--learn scrip-->
+    <section id="learn" class="p-5">
+      <div class="container">
+        <div class="row align-items-center justify-content-between">
+          <div class="col-md">
+            <img src="img/2.png" class="img-fluid" alt="" />
+          </div>
+          <!--col-md màn hình nhỏ hơn mức md thì sẽ rướt xuống thành 1 cột, nếu dùng col thì sẽ không rớt-->
+          <div class="col-md p-5">
+            <h2>Learn The Fundamentals.</h2>
+            <!--lead để làm phần văn bản to hơn-->
+            <p class="lead">
+              thẻ h1, h2, h3 thật thì ta có thể sử dụng những thẻ đó dưới dạng
+              lớp. Ta có thể sử dụng một thẻ div có lớp là h1.
+            </p>
+            <a href="#" class="btn btn-light mt-3">
+              <i class="bi bi-chevron-right"></i>Read More</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+    <!---->
+    <section id="learn" class="p-5 bg-dark text-light">
+      <div class="container">
+        <div class="row align-items-center justify-content-between">
+          <!--col-md màn hình nhỏ hơn mức md thì sẽ rướt xuống thành 1 cột, nếu dùng col thì sẽ không rớt-->
+          <div class="col-md p-5">
+            <h2>Learn React</h2>
+            <!--lead để làm phần văn bản to hơn-->
+            <p class="lead">
+              thẻ h1, h2, h3 thật thì ta có thể sử dụng những thẻ đó dưới dạng
+              lớp. Ta có thể sử dụng một thẻ div có lớp là h1.
+            </p>
+            <a href="#" class="btn btn-light mt-3">
+              <i class="bi bi-chevron-right"></i>Read More</a
+            >
+          </div>
+          <div class="col-md">
+            <!--img-fluid không mở rộng hình ảnh lớn hơn kích thước thật, thu nhỏ lại nếu màn hình nhỏ-->
+            <img src="img/2.png" class="img-fluid" alt="" />
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Questions Accordion-->
+    <section id="questions" class="p-5">
+      <div class="container">
+        <h2 class="center mb-4">Frequently Asked Questions</h2>
+        <!--Phía dưới tiêu đề h2 sẽ là accordion. Ta sẽ sử dụng lớp accordion. 
+        vào trang https://getbootstrap.com/docs/5.1/getting-started/introduction/. Đi đến components rồi đến Accordion.
+        Ở đây ta có style như thế này. Có tiêu đề, có đường viền. Tôi muốn sử dụng phiên bản Flush.
+        Trông phiên bản này gọn hơn một chút. Do vậy, tôi sẽ sử dụng accordion flush. Tôi sẽ lại
+        sao chép và dán cho nhanh. Tôi sẽ copy toàn bộ, dán vào trong file index.html rồi chỉnh sửa dần vậy.-->
+        <!--thay tất cả từ accordionFlushExample bên trong <div class="accordion accordion-flush" id="questions"> 
+        thành questions-->
+        <!--data-bs-target="#flush-collapseOne" và data-bs-parent="#questions" có liên quan với nhau là phải sửa lại
+        data-bs-target="#flush-collapseOne" thành data-bs-target="#question-one"-->
+        <!--đổi id="flush-collapseOne" thành id="question-one"-->
+        <!--Trong phần accordion-body, tôi bỏ phần code mẫu và sau đó sử dụng Lorem50. 
+          Vậy là xong phần câu trả lời cho câu hỏi 1.-->
+        <div class="accordion accordion-flush" id="questions">
+          <!--item1-->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#question-one"
+              >
+                Where exactly are you located?
+              </button>
+            </h2>
+            <div
+              id="question-one"
+              class="accordion-collapse collapse"
+              data-bs-parent="#questions"
+            >
+              <div class="accordion-body">Lorem50</div>
+            </div>
+          </div>
+          <!--item2-->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#question-two"
+              >
+                How much does it cost to attend?
+              </button>
+            </h2>
+            <div
+              id="question-two"
+              class="accordion-collapse collapse"
+              data-bs-parent="#questions"
+            >
+              <div class="accordion-body">Lorem50</div>
+            </div>
+          </div>
+          <!--item3-->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#question-three"
+              >
+                What do I need to know?
+              </button>
+            </h2>
+            <div
+              id="question-three"
+              class="accordion-collapse collapse"
+              data-bs-parent="#questions"
+            >
+              <div class="accordion-body">Lorem50</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--giới thiệu Giảng viên hướng dẫn-->
+    <section id="instructors" class="p-5 bg-primary">
+      <div class="container">
+        <h2 class="text-center text-white">Our Instructors</h2>
+        <p class="lead text-center text-white mb-5">
+          Copy paste phần văn bản giới thiệu giảng viên hướng dẫn đã chuẩn bị từ
+          trước.
+        </p>
+        <!--g viết tắt của guiter, tạo khoảng cách giữa các ô-->
+        <div class="row g-4">
+          <!--col-md-6. Trông có vẻ khó hiểu nếu các bạn chưa quen sử dụng hệ thống grid.
+          Có tất cả 12 hàng trong hệ thống grid, và ta muốn có một nửa của 12 cột
+          là 6 cột nên mới nhập col-md-6 với màn hình kích thước trung bình.
+          Đối với màn hình kích thước lớn, tôi muốn 1/3 của 12 cột là 4 cột. Do đó, nhập col-lg-3 để lấy được 4 cột.-->
+          <!--bg-light tạo màu nền màu xám nhạt-->
+          <div class="col-md-6 col-lg-3">
+            <div class="card bg-light">
+              <div class="card-body text-center">
+                <!--sử dụng một API đặc biệt để lấy đại hình ảnh của một người nào đó.
+                   Nhập https://randomuser.me/api/portraits/. Sau đó, ta lại nhập men hoặc women để chọn giới tính
+                    giảng viên Tôi sẽ nhập men, sau đó là thêm một con số bất kỳ. 11 đi. 11.jpg.-->
+                <img
+                  src="https://randomuser.me/api/portraits/men/11.jpg"
+                  alt=""
+                  class="rounded-circle mb-3"
+                />
+                <h3 class="card-title mb-3">John Doe</h3>
+                <p class="">Tiếp theo là một đoạn văn. Tôi sử dụng Lorem15.</p>
+                <!--Ở đây ta sẽ để đường link dẫn đến tài khoản Twitter của các giảng viên. Tôi muốn phần văn bản
+                  có màu tối nên để text-dark. Thông thường, theo mặc định, đường dẫn sẽ có màu xanh. mx-1 thiết lập margin 
+                theo trục tung 1px -->
+                <a href="#"><i class="bi bi-twitter text-dark mx-1"></i></a>
+                <a href="#"><i class="bi bi-facebook text-dark mx-1"></i></a>
+                <a href="#"><i class="bi bi-linkedin text-dark mx-1"></i></a>
+                <a href="#"><i class="bi bi-instagram text-dark mx-1"></i></a>
+              </div>
+            </div>
+          </div>
+          <!---->
+          <!--col-md-6. Trông có vẻ khó hiểu nếu các bạn chưa quen sử dụng hệ thống grid.
+          Có tất cả 12 hàng trong hệ thống grid, và ta muốn có một nửa của 12 cột
+          là 6 cột nên mới nhập col-md-6 với màn hình kích thước trung bình.
+          Đối với màn hình kích thước lớn, tôi muốn 1/3 của 12 cột là 4 cột. Do đó, nhập col-lg-3 để lấy được 4 cột.-->
+          <!--bg-light tạo màu nền màu xám nhạt-->
+          <div class="col-md-6 col-lg-3">
+            <div class="card bg-light">
+              <div class="card-body text-center">
+                <!--sử dụng một API đặc biệt để lấy đại hình ảnh của một người nào đó.
+                   Nhập https://randomuser.me/api/portraits/. Sau đó, ta lại nhập men hoặc women để chọn giới tính
+                    giảng viên Tôi sẽ nhập men, sau đó là thêm một con số bất kỳ. 11 đi. 11.jpg.-->
+                <img
+                  src="https://randomuser.me/api/portraits/women/11.jpg"
+                  alt=""
+                  class="rounded-circle mb-3"
+                />
+                <h3 class="card-title mb-3">Jane Doe</h3>
+                <p class="">Tiếp theo là một đoạn văn. Tôi sử dụng Lorem15.</p>
+                <!--Ở đây ta sẽ để đường link dẫn đến tài khoản Twitter của các giảng viên. Tôi muốn phần văn bản
+                  có màu tối nên để text-dark. Thông thường, theo mặc định, đường dẫn sẽ có màu xanh. mx-1 thiết lập margin 
+                theo trục tung 1px -->
+                <a href="#"><i class="bi bi-twitter text-dark mx-1"></i></a>
+                <a href="#"><i class="bi bi-facebook text-dark mx-1"></i></a>
+                <a href="#"><i class="bi bi-linkedin text-dark mx-1"></i></a>
+                <a href="#"><i class="bi bi-instagram text-dark mx-1"></i></a>
+              </div>
+            </div>
+          </div>
+          <!---->
+          <!--col-md-6. Trông có vẻ khó hiểu nếu các bạn chưa quen sử dụng hệ thống grid.
+          Có tất cả 12 hàng trong hệ thống grid, và ta muốn có một nửa của 12 cột
+          là 6 cột nên mới nhập col-md-6 với màn hình kích thước trung bình.
+          Đối với màn hình kích thước lớn, tôi muốn 1/3 của 12 cột là 4 cột. Do đó, nhập col-lg-3 để lấy được 4 cột.-->
+          <!--bg-light tạo màu nền màu xám nhạt-->
+          <div class="col-md-6 col-lg-3">
+            <div class="card bg-light">
+              <div class="card-body text-center">
+                <!--sử dụng một API đặc biệt để lấy đại hình ảnh của một người nào đó.
+                   Nhập https://randomuser.me/api/portraits/. Sau đó, ta lại nhập men hoặc women để chọn giới tính
+                    giảng viên Tôi sẽ nhập men, sau đó là thêm một con số bất kỳ. 11 đi. 11.jpg.-->
+                <img
+                  src="https://randomuser.me/api/portraits/men/12.jpg"
+                  alt=""
+                  class="rounded-circle mb-3"
+                />
+                <h3 class="card-title mb-3">Steve Smith</h3>
+                <p class="">Tiếp theo là một đoạn văn. Tôi sử dụng Lorem15.</p>
+                <!--Ở đây ta sẽ để đường link dẫn đến tài khoản Twitter của các giảng viên. Tôi muốn phần văn bản
+                  có màu tối nên để text-dark. Thông thường, theo mặc định, đường dẫn sẽ có màu xanh. mx-1 thiết lập margin 
+                theo trục tung 1px -->
+                <a href="#"><i class="bi bi-twitter text-dark mx-1"></i></a>
+                <a href="#"><i class="bi bi-facebook text-dark mx-1"></i></a>
+                <a href="#"><i class="bi bi-linkedin text-dark mx-1"></i></a>
+                <a href="#"><i class="bi bi-instagram text-dark mx-1"></i></a>
+              </div>
+            </div>
+          </div>
+          <!---->
+          <!--col-md-6. Trông có vẻ khó hiểu nếu các bạn chưa quen sử dụng hệ thống grid.
+          Có tất cả 12 hàng trong hệ thống grid, và ta muốn có một nửa của 12 cột
+          là 6 cột nên mới nhập col-md-6 với màn hình kích thước trung bình.
+          Đối với màn hình kích thước lớn, tôi muốn 1/3 của 12 cột là 4 cột. Do đó, nhập col-lg-3 để lấy được 4 cột.-->
+          <!--bg-light tạo màu nền màu xám nhạt-->
+          <div class="col-md-6 col-lg-3">
+            <div class="card bg-light">
+              <div class="card-body text-center">
+                <!--sử dụng một API đặc biệt để lấy đại hình ảnh của một người nào đó.
+                   Nhập https://randomuser.me/api/portraits/. Sau đó, ta lại nhập men hoặc women để chọn giới tính
+                    giảng viên Tôi sẽ nhập men, sau đó là thêm một con số bất kỳ. 11 đi. 11.jpg.-->
+                <img
+                  src="https://randomuser.me/api/portraits/women/12.jpg"
+                  alt=""
+                  class="rounded-circle mb-3"
+                />
+                <h3 class="card-title mb-3">Sarah Smith</h3>
+                <p class="">Tiếp theo là một đoạn văn. Tôi sử dụng Lorem15.</p>
+                <!--Ở đây ta sẽ để đường link dẫn đến tài khoản Twitter của các giảng viên. Tôi muốn phần văn bản
+                  có màu tối nên để text-dark. Thông thường, theo mặc định, đường dẫn sẽ có màu xanh. mx-1 thiết lập margin 
+                theo trục tung 1px -->
+                <a href="#"><i class="bi bi-twitter text-dark mx-1"></i></a>
+                <a href="#"><i class="bi bi-facebook text-dark mx-1"></i></a>
+                <a href="#"><i class="bi bi-linkedin text-dark mx-1"></i></a>
+                <a href="#"><i class="bi bi-instagram text-dark mx-1"></i></a>
+              </div>
+            </div>
+          </div>
+          <!---->
+        </div>
+      </div>
+    </section>
+    <!--Contact & Map.-->
+    <section class="p-5">
+      <div class="container">
+        <div class="row g-4">
+          <!-- muốn 2 cột đối với màn hình kích thước trung bình trở lên thì khai báo 2 <div class="col-md"> 
+          trong <div class="row g-4"> -->
+          <div class="col-md">
+            <h2 class="text-center mb-4">Contact Info</h2>
+            <!--list-group và list-group-flush lớp danh sách, lead phóng to phần văn bản trong danh sách-->
+            <ul class="list-group list-group-flush lead">
+              <li class="list-group-item">
+                <span class="fw-bold">Main Location:</span> 50 Main st Boston MA
+              </li>
+              <li class="list-group-item">
+                <span class="fw-bold">Enrollment Phone:</span> 1234567
+              </li>
+              <li class="list-group-item">
+                <span class="fw-bold">Student Phone:</span> 1232556666
+              </li>
+              <li class="list-group-item">
+                <span class="fw-bold">Enrollment Email:</span> 1232556666
+              </li>
+              <li class="list-group-item">
+                <span class="fw-bold">Student Email:</span> 1232556666
+              </li>
+            </ul>
+          </div>
+          <!--cột mapbox (bản đồ)-->
+          <div class="col-md">
+            <div id="map"></div>
+          </div>
+          <!---->
+        </div>
+      </div>
+    </section>
+    <!--footer-->
+    <!--position-relative là để sử dụng nó như một lớp. Lý do tôi làm vậy là vì tôi muốn có một nút
+    quay trở lên đầu trang.Ta sẽ thiết lập vị trí tuyệt đối bên trong phần chân trang.-->
+    <footer class="p-5 bg-dark text-white text-center position-relative">
+      <div class="container">
+        <p class="lead">Copyright &copy; 2021 Frontend Bootcamp</p>
+        <!--position-absolute bottom-0 end-0 định vị trí của icon, <i class="bi bi-arrow-up-circle h1"></i> icon quay lên đầu trang của bootstrap -->
+        <a href="#" class="position-absolute bottom-0 end-0 p-5">
+          <i class="bi bi-arrow-up-circle h1"></i>
+        </a>
+      </div>
+    </footer>
+    <!--modal (đoạn này dùng để làm khi nhấn vào nút Start The Enrollment hiện ra một thông báo,
+      để làm được việc này trước tiên phải quay trở lại nút Start The Enrollment thêm 2 thuộc tính 
+      data-bs-toggle="modal", data-bs-target="#enroll"), enroll chính là id của modal. sau đó vào trang 
+    https://getbootstrap.com/docs/5.1/getting-started/introduction/ chọn  components, chon modal,
+     chọn live demo ở bên phải copy hết phần Modal dán vào sau thẻ kết thúc footer như đã làm bên dưới. sau đó đổi 
+    id phần vừa mới copy thành enroll (2 chỗ có thuộc tính id cần đổi id cũ thành enroll)-->
+    <div class="modal fade" id="enroll" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="enrollLabel">Modal title</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p class="lead">Fill out this form and we will get back to you</p>
+            <form>
+              <div class="mb-3">
+                <label for="first-name" class="col-form-label"
+                  >First Name</label
+                >
+                <input type="text" class="form-control" id="first-name" />
+              </div>
+              <!---->
+              <div class="mb-3">
+                <label for="last-name" class="col-form-label">Last Name</label>
+                <input type="text" class="form-control" id="last-name" />
+              </div>
+              <!---->
+              <div class="mb-3">
+                <label for="email" class="col-form-label">Email</label>
+                <input type="text" class="form-control" id="email" />
+              </div>
+              <!---->
+              <div class="mb-3">
+                <label for="phone" class="col-form-label">Phone</label>
+                <input type="text" class="form-control" id="phone" />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!---->
+    <!--dùng sử dụng bootstrap. cách lấy:vào trang https://getbootstrap.com/docs/5.1/getting-started/introduction/
+      chọn Introduction màn hình bên phải chọn mục Bundle , sao chép link và dán vào-->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <!--mapbox-->
+    <!--vao trang https://www.mapbox.com/, chọn sign in (đăng ký phải nhập số thẻ ngân hàng),sau đó đăng nhập, 
+      chọn Go to account Tiếp theo, ta cần lấy token truy cập. Các bạn có thể nhấn Create a token (tạo token).
+      lên phía trên chọn JS web, Chọn sử dụng Mapbox CDN, copy dòng thứ 2 trước dán vào thẻ head trước thẻ
+      <link rel="stylesheet" href="./css/styles.css" />, sau đó làm theo hướng dẫn bên dưới 
+    -->
+    <!--copy dòng scrip thứ nhất <scrip src="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js" ></scrip> 
+      dán vào đây
+    -->
+
+    <!--
+      nhấn next ở màn hình có 2 dòng vừa mới copy, rồi copy toàn bộ phần scrip dán vào đây.
+      Hãy sử dụng khóa của riêng bạn. Nó sẽ tự động thêm khóa của bạn vào đây. sau đó thêm những thông tin 
+      như center: [] để tập trung vào một vùng nhất định.Ta sẽ nhập giá trị kinh độ - vĩ độ như sau.
+      Kinh độ là -71.060982. Đây là tọa độ của Boston MA. Các bạn thích nhập kinh độ - vĩ độ thế nào cũng được.
+      Vĩ độ là 42.35725. Sau đó thiết lập mức độ phóng to bản đồ là 18. zoom: 18 (tương tự như script minh hoạ bên dưới)
+      Lưu lại. Khi xem kết quả,
+      ta sẽ chưa thấy gì hết. Đó là bởi vì thẻ div chưa có chiều cao và chiều rộng. Để thiết lập chiều cao và 
+      chiều rộng cho thẻ div, ta lại phải nhờ đến sheet style.css tùy chỉnh. qua file style.css nhập id map. #map.
+      Thiết lập chiều rộng width là 100%. width: 100%. Chiều cao cũng vậy. height: 100%. Đến giờ bo góc rồi. Nhập border-radius: 10px.
+      <scrip>
+        mapboxgl.accessToken=’pk.
+        eyJ1IjoiYnRyYXZlcnN5IiwiYSI6ImNrbmh0dXF1NzBtbnMyb3MzcTBpaG10eXcifQ.
+        h5ZyYCglnmdOLAGGiL1Auw’; 
+        var map=new mapboxgl.Map({
+        container: ‘map’, style: ‘mapbox://styles/mapbox/streets-v11’,
+        center: [-71.060982 42.35725],
+        zoom:18,
+        });
+      </scrip>
+
+    -->
+
+    <!---->
+  </body>
+</html>

@@ -1,0 +1,21 @@
+/*Như vậy sử dụng body::before trên trang sẽ xuất hiện một phần tử "ma"
+khoảng 60 pixel để đẩy hình ảnh cô gái lập trình xuống phía dưới,
+để lộ toàn bộ phần đầu. Muốn sử dụng trình chọn giả before hay after
+thì đều phải thêm content. Hiện tại ta chưa muốn thêm nội dung gì nên cứ để content: "".*/
+body::before {
+  display: block;
+  content: "";
+  height: 60px;
+}
+/*dùng cho mapbox (bản đồ)
+#map {
+  width: 100%;
+  height: 100%;
+  border-radius: 10%;
+}
+*/
+@media (min-width: 768px) {
+  .news-input {
+    width: 50%;
+  }
+}
