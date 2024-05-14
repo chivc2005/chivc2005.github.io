@@ -1,0 +1,6 @@
+@media (max-width: 768px) {
+  /*phần showcase*/
+  nav a div {
+    display: none;
+  }
+}
