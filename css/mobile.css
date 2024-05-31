@@ -1,0 +1,84 @@
+@media only screen and (max-width: 767px) {
+  section > .container {
+    padding: 30px 20px;
+  }
+  .name {
+    display: none;
+  }
+  #nav-bar {
+    border: none;
+  }
+  #nav-bar .container {
+    flex-direction: column;
+  }
+  #nav-bar .container a {
+    padding: 10px;
+    border-left: none;
+    border-right: none;
+  }
+  /*...................................*/
+  #about {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .info-group {
+    display: block !important;
+  }
+  .submit-email {
+    display: none;
+  }
+  /*....................................*/
+  .job-info .container,
+  .certificate-container,
+  .project-container,
+  .certificate-item {
+    grid-template-columns: 1fr;
+  }
+  .job-item2 {
+    grid-template-columns: 1fr;
+  }
+  .job-content {
+    display: block !important;
+  }
+  .job-header button {
+    display: none !important;
+  }
+
+  .borbot:first-child .certificate-item {
+    border-right: none;
+    margin-bottom: 30px;
+    padding-right: 0;
+  }
+  .borbot:nth-child(2) .certificate-item {
+    margin-bottom: 30px;
+  }
+  .borbot:first-child {
+    border-right: none;
+    border-bottom: 1px solid orange;
+  }
+  .borbot:nth-child(2) {
+    margin-top: 30px;
+    border-bottom: 1px solid orange;
+  }
+
+  .project-container {
+    row-gap: 40px;
+  }
+  .compos {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .project-item .time-line {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .project-item .time-line {
+    align-items: flex-start;
+  }
+  .hobbies {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  #footer span {
+    display: none;
+  }
+}
